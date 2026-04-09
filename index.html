@@ -1172,37 +1172,48 @@
         });
       });
 
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
+      form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-        const isValid = validateForm();
-        updateProgress();
+  const isValid = validateForm();
+  updateProgress();
 
-        if (!isValid) return;
+  if (!isValid) return;
 
-        submitButton.disabled = true;
-        submitButton.textContent = "Отправка...";
+  submitButton.disabled = true;
+  submitButton.textContent = "Отправка...";
 
-        const formData = Object.fromEntries(new FormData(form).entries());
+  const formData = Object.fromEntries(new FormData(form).entries());
 
-        setTimeout(function () {
-          console.log("FORM_DATA:", formData);
+  try {
+    const response = await fetch("https://reincarnation-backend.onrender.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
 
-          successState.classList.add("is-visible");
-          submitButton.textContent = "Заявка отправлена";
-          submitButton.disabled = false;
+    const result = await response.json();
 
-          // TELEGRAM WEB APP
-          // if (window.Telegram && window.Telegram.WebApp) {
-          //   window.Telegram.WebApp.sendData(JSON.stringify(formData));
-          // }
+    if (!response.ok || !result.ok) {
+      throw new Error("Ошибка отправки");
+    }
 
-          // WEBHOOK / BACKEND
-          // fetch("https://your-domain.com/webhook", {
-          //   method: "POST",
-          //   headers: { "Content-Type": "application/json" },
-          //   body: JSON.stringify(formData)
-          // }).catch(console.error);
+    successState.classList.add("is-visible");
+    submitButton.textContent = "Заявка отправлена";
+
+    form.reset();
+    updateProgress();
+
+  } catch (error) {
+    console.error(error);
+    submitButton.textContent = "Ошибка отправки";
+    alert("Не удалось отправить заявку");
+  } finally {
+    submitButton.disabled = false;
+  }
+});
 
           successState.scrollIntoView({
             behavior: "smooth",
