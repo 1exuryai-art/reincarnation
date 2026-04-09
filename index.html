@@ -1243,3 +1243,31 @@
   </script>
 </body>
 </html>
+
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ApplicationBuilder, CommandHandler
+import os
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+async def start(update, context):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton(
+                text=" ОТКРЫТЬ НАБОР",
+                url="https://1exuryai-art.github.io/reincarnation/"
+            )
+        ]
+    ])
+
+    await context.bot.send_photo(
+        chat_id=update.effective_chat.id,
+        photo="https://1exuryai-art.github.io/reincarnation/реинкарнация.png",
+        caption="РЕИНКАРНАЦИЯ\n\nОтбор на программу наставничества.",
+        reply_markup=keyboard
+    )
+
+app = ApplicationBuilder().token(BOT_TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+
+app.run_polling()
