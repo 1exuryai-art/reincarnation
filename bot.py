@@ -2,11 +2,9 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 TOKEN = "8315955729:AAHSKWoTabr3Ant3rSUpP0zLwqaJaOyIgIY"
+SITE_URL = "https://1exuryai-art.github.io/reincarnation/"
 
 bot = telebot.TeleBot(TOKEN)
-
-PHOTO_URL = "https://1exuryai-art.github.io/reincarnation/cover.png"
-SITE_URL = "https://1exuryai-art.github.io/reincarnation/"
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -15,12 +13,13 @@ def start(message):
         InlineKeyboardButton("ОТКРЫТЬ НАБОР", url=SITE_URL)
     )
 
-    bot.send_photo(
-        chat_id=message.chat.id,
-        photo=PHOTO_URL,
-        caption="РЕИНКАРНАЦИЯ\n\nОтбор на программу наставничества.",
-        reply_markup=keyboard
-    )
+    with open("cover.png", "rb") as photo:
+        bot.send_photo(
+            chat_id=message.chat.id,
+            photo=photo,
+            caption="РЕИНКАРНАЦИЯ\n\nОтбор на программу наставничества.",
+            reply_markup=keyboard
+        )
 
 print("bot started")
-bot.infinity_polling()
+bot.infinity_polling(skip_pending=True)
