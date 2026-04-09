@@ -1,5 +1,5 @@
 import telebot
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 TOKEN = "8315955729:AAHSKWoTabr3Ant3rSUpP0zLwqaJaOyIgIY"
 SITE_URL = "https://1exuryai-art.github.io/reincarnation/"
@@ -10,7 +10,10 @@ bot = telebot.TeleBot(TOKEN)
 def start(message):
     keyboard = InlineKeyboardMarkup()
     keyboard.add(
-        InlineKeyboardButton("ОТКРЫТЬ НАБОР", url=SITE_URL)
+        InlineKeyboardButton(
+            text="ОТКРЫТЬ НАБОР",
+            web_app=WebAppInfo(url=SITE_URL)
+        )
     )
 
     with open("cover.png", "rb") as photo:
