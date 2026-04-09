@@ -5,7 +5,7 @@ TOKEN = "8315955729:AAHSKWoTabr3Ant3rSUpP0zLwqaJaOyIgIY"
 
 bot = telebot.TeleBot(TOKEN)
 
-PHOTO_URL = "https://1exuryai-art.github.io/reincarnation/реинкарнация.png"
+PHOTO_URL = "https://1exuryai-art.github.io/reincarnation/cover.png"
 SITE_URL = "https://1exuryai-art.github.io/reincarnation/"
 
 @bot.message_handler(commands=['start'])
