@@ -21,33 +21,30 @@
 
   <style>
     :root {
-      --bg: #080706;
-      --bg-soft: rgba(255, 248, 235, 0.04);
-      --card: rgba(20, 16, 12, 0.56);
-      --card-strong: rgba(18, 14, 10, 0.82);
-      --stroke: rgba(255, 240, 213, 0.12);
-      --stroke-strong: rgba(255, 230, 180, 0.22);
+      --bg: #070605;
+      --bg-2: #0d0a08;
+      --card: rgba(22, 16, 12, 0.66);
+      --card-2: rgba(15, 11, 8, 0.78);
+      --stroke: rgba(255, 235, 196, 0.14);
+      --stroke-soft: rgba(255, 235, 196, 0.08);
       --text: #f7f1e8;
-      --muted: rgba(247, 241, 232, 0.68);
-      --muted-2: rgba(247, 241, 232, 0.46);
-      --gold: #d7b06a;
-      --gold-soft: #f0d7a3;
-      --gold-deep: #9e7340;
-      --white-glow: rgba(255, 255, 255, 0.52);
-      --success-bg: rgba(202, 164, 92, 0.1);
-      --success-border: rgba(228, 197, 137, 0.28);
-      --danger: #ff8f7f;
-      --shadow-xl:
-        0 20px 80px rgba(0, 0, 0, 0.45),
-        0 10px 30px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      --shadow-soft:
-        0 10px 30px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
-      --radius-xl: 28px;
+      --muted: rgba(247, 241, 232, 0.72);
+      --muted-2: rgba(247, 241, 232, 0.48);
+      --gold: #d6af6b;
+      --gold-2: #f0d7a4;
+      --gold-3: #bf8a43;
+      --danger: #ff8e82;
+      --success: #d9c08d;
+      --radius-xl: 30px;
       --radius-lg: 22px;
       --radius-md: 18px;
-      --radius-sm: 14px;
+      --shadow-xl:
+        0 20px 70px rgba(0, 0, 0, 0.42),
+        0 8px 28px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      --shadow-md:
+        0 10px 26px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.03);
       --transition: 220ms ease;
     }
 
@@ -62,122 +59,123 @@
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: "Inter", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 50% 0%, rgba(243, 198, 120, 0.20), transparent 26%),
-        radial-gradient(circle at 15% 12%, rgba(255, 206, 112, 0.12), transparent 22%),
-        radial-gradient(circle at 88% 18%, rgba(255, 246, 225, 0.10), transparent 18%),
-        radial-gradient(circle at 50% 100%, rgba(113, 70, 28, 0.18), transparent 32%),
-        linear-gradient(180deg, #090806 0%, #0a0807 24%, #090807 50%, #070605 100%);
-      min-height: 100vh;
+        linear-gradient(180deg, rgba(8, 6, 5, 0.78) 0%, rgba(8, 6, 5, 0.58) 20%, rgba(8, 6, 5, 0.52) 50%, rgba(8, 6, 5, 0.72) 100%),
+        linear-gradient(180deg, #090705 0%, #0b0806 30%, #070605 100%);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      position: relative;
     }
 
-    body::before,
+    /* ГЛАВНЫЙ ВЕРТИКАЛЬНЫЙ ФОН */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(10, 8, 6, 0.86) 0%, rgba(10, 8, 6, 0.48) 18%, rgba(10, 8, 6, 0.36) 48%, rgba(10, 8, 6, 0.52) 72%, rgba(10, 8, 6, 0.84) 100%),
+        url("hero-vertical.png") center top / cover no-repeat;
+      filter: saturate(0.92) brightness(0.78);
+      transform: scale(1.04);
+    }
+
+    /* ТЁПЛОЕ СВЕЧЕНИЕ ПОВЕРХ ФОНА */
     body::after {
       content: "";
       position: fixed;
-      inset: auto;
+      inset: 0;
+      z-index: -2;
       pointer-events: none;
-      z-index: 0;
-      filter: blur(70px);
-      opacity: 0.8;
-    }
-
-    body::before {
-      width: 220px;
-      height: 220px;
-      top: 110px;
-      left: -40px;
-      background: rgba(230, 177, 78, 0.18);
-      border-radius: 50%;
-    }
-
-    body::after {
-      width: 260px;
-      height: 260px;
-      top: 140px;
-      right: -70px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 6%, rgba(239, 202, 132, 0.24), transparent 22%),
+        radial-gradient(circle at 18% 18%, rgba(255, 227, 174, 0.10), transparent 18%),
+        radial-gradient(circle at 82% 30%, rgba(224, 166, 71, 0.12), transparent 16%),
+        radial-gradient(circle at 50% 56%, rgba(255, 240, 210, 0.06), transparent 20%),
+        radial-gradient(circle at 50% 88%, rgba(215, 165, 82, 0.12), transparent 16%);
+      mix-blend-mode: screen;
     }
 
     .page {
       position: relative;
-      z-index: 1;
       width: 100%;
       max-width: 480px;
       margin: 0 auto;
-      padding: calc(env(safe-area-inset-top, 0px) + 18px) 14px calc(env(safe-area-inset-bottom, 0px) + 28px);
+      padding:
+        calc(env(safe-area-inset-top, 0px) + 18px)
+        14px
+        calc(env(safe-area-inset-bottom, 0px) + 28px);
+      z-index: 1;
     }
 
     .ambient {
       position: absolute;
       inset: 0;
-      overflow: hidden;
       pointer-events: none;
+      overflow: hidden;
       z-index: 0;
     }
 
     .ambient__blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(55px);
-      opacity: 0.42;
+      filter: blur(60px);
+      opacity: 0.34;
     }
 
     .ambient__blob--1 {
       width: 150px;
       height: 150px;
-      top: 220px;
-      left: -24px;
-      background: rgba(255, 201, 117, 0.18);
+      top: 120px;
+      left: -20px;
+      background: rgba(255, 203, 114, 0.16);
     }
 
     .ambient__blob--2 {
       width: 170px;
       height: 170px;
-      top: 80px;
-      right: -30px;
-      background: rgba(255, 250, 240, 0.14);
+      top: 420px;
+      right: -34px;
+      background: rgba(255,255,255,0.10);
     }
 
     .ambient__blob--3 {
       width: 180px;
       height: 180px;
-      bottom: 200px;
-      right: -32px;
-      background: rgba(182, 127, 46, 0.16);
+      bottom: 160px;
+      left: -44px;
+      background: rgba(209, 147, 58, 0.16);
     }
 
     .top-progress {
       position: sticky;
       top: calc(env(safe-area-inset-top, 0px) + 8px);
-      z-index: 20;
+      z-index: 30;
       margin-bottom: 14px;
       padding: 12px 14px;
+      border-radius: 18px;
       border: 1px solid var(--stroke);
-      background: rgba(14, 11, 9, 0.72);
+      background: rgba(16, 12, 9, 0.62);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-radius: 18px;
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-md);
     }
 
     .top-progress__meta {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
     .top-progress__label {
       font-size: 12px;
-      line-height: 1;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
@@ -187,28 +185,26 @@
     .top-progress__value {
       font-size: 13px;
       font-weight: 700;
-      color: var(--gold-soft);
+      color: var(--gold-2);
     }
 
     .progress-track {
       width: 100%;
       height: 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255,255,255,0.06);
       overflow: hidden;
-      position: relative;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
     .progress-bar {
-      height: 100%;
       width: 0%;
+      height: 100%;
       border-radius: inherit;
-      background:
-        linear-gradient(90deg, rgba(203, 152, 75, 0.95) 0%, rgba(241, 211, 156, 0.98) 100%);
+      background: linear-gradient(90deg, rgba(199, 146, 64, 0.98), rgba(243, 214, 161, 0.98));
       box-shadow:
-        0 0 18px rgba(226, 185, 118, 0.32),
-        0 0 38px rgba(241, 213, 162, 0.18);
+        0 0 18px rgba(231, 193, 124, 0.28),
+        0 0 36px rgba(243, 214, 161, 0.18);
       transition: width 260ms ease;
       position: relative;
     }
@@ -217,52 +213,63 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.22) 50%,
-        transparent 100%
-      );
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.26) 50%, transparent 100%);
       opacity: 0.8;
-      mix-blend-mode: screen;
     }
 
     .hero,
     .form-shell {
       position: relative;
+      overflow: hidden;
       border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(23, 18, 14, 0.72), rgba(14, 11, 9, 0.62));
+      background:
+        linear-gradient(180deg, rgba(21, 16, 12, 0.70), rgba(12, 10, 8, 0.72));
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       box-shadow: var(--shadow-xl);
-      overflow: hidden;
     }
 
     .hero {
       border-radius: var(--radius-xl);
-      padding: 28px 18px 24px;
+      padding: 28px 18px 26px;
       text-align: center;
       margin-bottom: 16px;
     }
 
-    .hero::before,
-    .form-shell::before {
+    /* ВНУТРЕННИЙ HERO-ФОН */
+    .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 26%),
-        radial-gradient(circle at top center, rgba(255, 217, 155, 0.08), transparent 30%);
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 22%),
+        linear-gradient(180deg, rgba(10, 8, 6, 0.18), rgba(10, 8, 6, 0.58)),
+        url("hero-vertical.png") center 16% / cover no-repeat;
+      opacity: 0.24;
+      filter: blur(3px) saturate(0.92);
+      transform: scale(1.05);
       pointer-events: none;
+    }
+
+    .hero::after,
+    .form-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top center, rgba(255, 224, 164, 0.09), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 18%);
     }
 
     .logo-wrap {
       position: relative;
-      width: 132px;
-      height: 132px;
-      margin: 0 auto 20px;
+      width: 134px;
+      height: 134px;
+      margin: 0 auto 18px;
       display: grid;
       place-items: center;
+      z-index: 1;
     }
 
     .logo-wrap::before,
@@ -274,38 +281,38 @@
     }
 
     .logo-wrap::before {
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background:
-        radial-gradient(circle, rgba(255, 255, 255, 0.34) 0%, rgba(255,255,255,0.18) 28%, rgba(255,255,255,0.03) 62%, transparent 76%);
+        radial-gradient(circle, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.16) 28%, rgba(255,255,255,0.03) 62%, transparent 74%);
       filter: blur(10px);
-      animation: auraPulse 4.8s ease-in-out infinite;
+      animation: auraPulse 5s ease-in-out infinite;
     }
 
     .logo-wrap::after {
-      width: 82%;
-      height: 82%;
-      background: radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 68%);
+      width: 84%;
+      height: 84%;
+      background: radial-gradient(circle, rgba(255,255,255,0.28) 0%, transparent 70%);
       filter: blur(18px);
-      animation: auraFloat 5.2s ease-in-out infinite;
+      animation: auraFloat 5.6s ease-in-out infinite;
     }
 
     .logo-frame {
       position: relative;
-      width: 104px;
-      height: 104px;
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
       display: grid;
       place-items: center;
       background:
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.01) 100%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.01) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
       border: 1px solid rgba(255,255,255,0.10);
       box-shadow:
         0 0 28px rgba(255,255,255,0.14),
-        0 0 60px rgba(255,215,155,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.12);
+        0 0 56px rgba(255,216,153,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.14);
       overflow: hidden;
+      z-index: 1;
     }
 
     .logo-frame img {
@@ -314,14 +321,15 @@
       object-fit: contain;
       display: block;
       filter:
-        drop-shadow(0 0 10px rgba(255,255,255,0.32))
-        drop-shadow(0 0 22px rgba(255,255,255,0.16));
+        drop-shadow(0 0 10px rgba(255,255,255,0.30))
+        drop-shadow(0 0 22px rgba(255,255,255,0.14));
     }
 
     .eyebrow {
+      position: relative;
+      z-index: 1;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       min-height: 28px;
       padding: 0 12px;
       margin-bottom: 14px;
@@ -329,28 +337,32 @@
       border: 1px solid rgba(255, 235, 196, 0.12);
       background: rgba(255, 248, 235, 0.05);
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.11em;
-      color: var(--gold-soft);
+      text-transform: uppercase;
+      color: var(--gold-2);
       font-weight: 700;
     }
 
     .hero h1 {
+      position: relative;
+      z-index: 1;
       margin: 0 0 10px;
       font-size: clamp(30px, 8vw, 38px);
       line-height: 1.02;
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
       color: #fff8ef;
-      text-shadow: 0 0 20px rgba(255, 222, 171, 0.08);
+      text-shadow: 0 0 20px rgba(255, 222, 171, 0.09);
     }
 
     .hero p {
+      position: relative;
+      z-index: 1;
       margin: 0 auto;
       max-width: 340px;
-      color: var(--muted);
       font-size: 14px;
       line-height: 1.55;
+      color: var(--muted);
       font-weight: 500;
     }
 
@@ -360,24 +372,41 @@
     }
 
     .form-inner {
+      position: relative;
+      z-index: 1;
       padding: 6px;
     }
 
     .section {
       position: relative;
+      overflow: hidden;
+      margin-bottom: 12px;
       padding: 18px 14px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 240, 213, 0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
-      margin-bottom: 12px;
-      overflow: hidden;
+      border: 1px solid var(--stroke-soft);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .section:last-child {
       margin-bottom: 0;
     }
 
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 20%);
+      opacity: 0.8;
+    }
+
     .section__top {
+      position: relative;
+      z-index: 1;
       margin-bottom: 16px;
     }
 
@@ -385,22 +414,24 @@
       display: inline-block;
       margin-bottom: 10px;
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.10em;
-      color: var(--gold-soft);
+      text-transform: uppercase;
+      color: var(--gold-2);
       font-weight: 700;
     }
 
     .section__title {
       margin: 0;
       font-size: 18px;
-      line-height: 1.15;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: -0.03em;
     }
 
     .field {
+      position: relative;
+      z-index: 1;
       margin-bottom: 16px;
     }
 
@@ -425,14 +456,14 @@
     }
 
     .required-mark {
-      color: var(--gold-soft);
+      color: var(--gold-2);
       margin-left: 4px;
     }
 
     .control {
       width: 100%;
       appearance: none;
-      border: 1px solid rgba(255, 240, 213, 0.10);
+      border: 1px solid rgba(255, 240, 213, 0.12);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
         rgba(13, 11, 9, 0.72);
@@ -459,7 +490,7 @@
     }
 
     .control:hover {
-      border-color: rgba(255, 225, 170, 0.14);
+      border-color: rgba(255, 225, 170, 0.16);
     }
 
     .control:focus {
@@ -518,8 +549,8 @@
       align-items: flex-start;
       padding: 14px;
       border-radius: 18px;
-      border: 1px solid rgba(255, 240, 213, 0.09);
-      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 240, 213, 0.10);
+      background: rgba(255,255,255,0.025);
     }
 
     .checkbox-row input[type="checkbox"] {
@@ -538,7 +569,7 @@
     }
 
     .checkbox-row input[type="checkbox"]:checked {
-      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+      background: linear-gradient(180deg, var(--gold-2), var(--gold));
       border-color: rgba(255, 232, 178, 0.34);
       box-shadow:
         0 0 20px rgba(232, 193, 120, 0.20),
@@ -581,27 +612,24 @@
       letter-spacing: -0.02em;
       color: #25190c;
       cursor: pointer;
-      background:
-        linear-gradient(180deg, #f6e2bd 0%, #e2ba78 52%, #cb9452 100%);
+      background: linear-gradient(180deg, #f7e3bf 0%, #e1ba79 54%, #cb9554 100%);
       box-shadow:
         0 12px 28px rgba(200, 145, 66, 0.22),
         0 0 36px rgba(240, 213, 162, 0.14),
         inset 0 1px 0 rgba(255, 255, 255, 0.42);
+      position: relative;
+      overflow: hidden;
       transition:
         transform var(--transition),
         box-shadow var(--transition),
-        filter var(--transition),
         opacity var(--transition);
-      position: relative;
-      overflow: hidden;
     }
 
     .submit-btn::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 35%, transparent 65%);
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 35%, transparent 65%);
       transform: translateX(-120%);
       transition: transform 700ms ease;
     }
@@ -613,12 +641,12 @@
 
     .submit-btn:hover,
     .submit-btn:focus-visible {
+      outline: none;
       transform: translateY(-1px);
       box-shadow:
         0 16px 34px rgba(200, 145, 66, 0.24),
         0 0 42px rgba(240, 213, 162, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.45);
-      outline: none;
     }
 
     .submit-btn:active {
@@ -631,10 +659,10 @@
     }
 
     .error-text {
+      display: none;
       margin-top: 8px;
       font-size: 12px;
       color: var(--danger);
-      display: none;
     }
 
     .field.invalid .control,
@@ -654,10 +682,10 @@
       margin-top: 14px;
       padding: 18px 16px;
       border-radius: 20px;
-      border: 1px solid var(--success-border);
+      border: 1px solid rgba(228, 197, 137, 0.26);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-        var(--success-bg);
+        rgba(202, 164, 92, 0.08);
       box-shadow:
         0 10px 28px rgba(0,0,0,0.18),
         inset 0 1px 0 rgba(255,255,255,0.04);
@@ -685,9 +713,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(14px);
-      transition:
-        opacity 700ms ease,
-        transform 700ms ease;
+      transition: opacity 700ms ease, transform 700ms ease;
     }
 
     .reveal.is-visible {
@@ -777,10 +803,9 @@
     <section class="hero reveal" aria-labelledby="hero-title">
       <div class="logo-wrap">
         <div class="logo-frame">
-          <!-- ЗАМЕНИ src НА СВОЙ ЛОГОТИП -->
           <img
             src="logo.png"
-            alt="реинкарнация.png"
+            alt="Символ программы Реинкарнация"
             id="heroLogo"
           />
         </div>
@@ -1163,20 +1188,16 @@
         setTimeout(function () {
           console.log("FORM_DATA:", formData);
 
-          form.style.display = "block";
           successState.classList.add("is-visible");
           submitButton.textContent = "Заявка отправлена";
           submitButton.disabled = false;
 
-          // Если хочешь скрывать форму после успеха, раскомментируй:
-          // form.querySelectorAll(".section:not(:last-child)").forEach(el => el.style.display = "none");
-
-          // Telegram WebApp integration example:
+          // TELEGRAM WEB APP
           // if (window.Telegram && window.Telegram.WebApp) {
           //   window.Telegram.WebApp.sendData(JSON.stringify(formData));
           // }
 
-          // Webhook example:
+          // WEBHOOK / BACKEND
           // fetch("https://your-domain.com/webhook", {
           //   method: "POST",
           //   headers: { "Content-Type": "application/json" },
@@ -1210,9 +1231,6 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-
-        // Можно подстроить цвета Telegram темы при желании:
-        // document.body.style.backgroundColor = tg.themeParams.bg_color || "#080706";
       }
 
       updateProgress();
