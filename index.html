@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  />
+  <title>Реинкарнация — Отбор в наставничество</title>
+  <meta
+    name="description"
+    content="Отбор на программу наставничества для тех, кто готов зайти в рост, дисциплину и реальную работу над собой."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #080706;
+      --bg-soft: rgba(255, 248, 235, 0.04);
+      --card: rgba(20, 16, 12, 0.56);
+      --card-strong: rgba(18, 14, 10, 0.82);
+      --stroke: rgba(255, 240, 213, 0.12);
+      --stroke-strong: rgba(255, 230, 180, 0.22);
+      --text: #f7f1e8;
+      --muted: rgba(247, 241, 232, 0.68);
+      --muted-2: rgba(247, 241, 232, 0.46);
+      --gold: #d7b06a;
+      --gold-soft: #f0d7a3;
+      --gold-deep: #9e7340;
+      --white-glow: rgba(255, 255, 255, 0.52);
+      --success-bg: rgba(202, 164, 92, 0.1);
+      --success-border: rgba(228, 197, 137, 0.28);
+      --danger: #ff8f7f;
+      --shadow-xl:
+        0 20px 80px rgba(0, 0, 0, 0.45),
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      --shadow-soft:
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(243, 198, 120, 0.20), transparent 26%),
+        radial-gradient(circle at 15% 12%, rgba(255, 206, 112, 0.12), transparent 22%),
+        radial-gradient(circle at 88% 18%, rgba(255, 246, 225, 0.10), transparent 18%),
+        radial-gradient(circle at 50% 100%, rgba(113, 70, 28, 0.18), transparent 32%),
+        linear-gradient(180deg, #090806 0%, #0a0807 24%, #090807 50%, #070605 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(70px);
+      opacity: 0.8;
+    }
+
+    body::before {
+      width: 220px;
+      height: 220px;
+      top: 110px;
+      left: -40px;
+      background: rgba(230, 177, 78, 0.18);
+      border-radius: 50%;
+    }
+
+    body::after {
+      width: 260px;
+      height: 260px;
+      top: 140px;
+      right: -70px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: calc(env(safe-area-inset-top, 0px) + 18px) 14px calc(env(safe-area-inset-bottom, 0px) + 28px);
+    }
+
+    .ambient {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(55px);
+      opacity: 0.42;
+    }
+
+    .ambient__blob--1 {
+      width: 150px;
+      height: 150px;
+      top: 220px;
+      left: -24px;
+      background: rgba(255, 201, 117, 0.18);
+    }
+
+    .ambient__blob--2 {
+      width: 170px;
+      height: 170px;
+      top: 80px;
+      right: -30px;
+      background: rgba(255, 250, 240, 0.14);
+    }
+
+    .ambient__blob--3 {
+      width: 180px;
+      height: 180px;
+      bottom: 200px;
+      right: -32px;
+      background: rgba(182, 127, 46, 0.16);
+    }
+
+    .top-progress {
+      position: sticky;
+      top: calc(env(safe-area-inset-top, 0px) + 8px);
+      z-index: 20;
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(14, 11, 9, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .top-progress__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .top-progress__label {
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .top-progress__value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-soft);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background:
+        linear-gradient(90deg, rgba(203, 152, 75, 0.95) 0%, rgba(241, 211, 156, 0.98) 100%);
+      box-shadow:
+        0 0 18px rgba(226, 185, 118, 0.32),
+        0 0 38px rgba(241, 213, 162, 0.18);
+      transition: width 260ms ease;
+      position: relative;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 100%
+      );
+      opacity: 0.8;
+      mix-blend-mode: screen;
+    }
+
+    .hero,
+    .form-shell {
+      position: relative;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(23, 18, 14, 0.72), rgba(14, 11, 9, 0.62));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .hero {
+      border-radius: var(--radius-xl);
+      padding: 28px 18px 24px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .hero::before,
+    .form-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 26%),
+        radial-gradient(circle at top center, rgba(255, 217, 155, 0.08), transparent 30%);
+      pointer-events: none;
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 20px;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-wrap::before,
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .logo-wrap::before {
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.34) 0%, rgba(255,255,255,0.18) 28%, rgba(255,255,255,0.03) 62%, transparent 76%);
+      filter: blur(10px);
+      animation: auraPulse 4.8s ease-in-out infinite;
+    }
+
+    .logo-wrap::after {
+      width: 82%;
+      height: 82%;
+      background: radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 68%);
+      filter: blur(18px);
+      animation: auraFloat 5.2s ease-in-out infinite;
+    }
+
+    .logo-frame {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.01) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        0 0 28px rgba(255,255,255,0.14),
+        0 0 60px rgba(255,215,155,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+
+    .logo-frame img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      display: block;
+      filter:
+        drop-shadow(0 0 10px rgba(255,255,255,0.32))
+        drop-shadow(0 0 22px rgba(255,255,255,0.16));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 28px;
+      padding: 0 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 235, 196, 0.12);
+      background: rgba(255, 248, 235, 0.05);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: var(--gold-soft);
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 8vw, 38px);
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #fff8ef;
+      text-shadow: 0 0 20px rgba(255, 222, 171, 0.08);
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 340px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .form-shell {
+      border-radius: var(--radius-xl);
+      padding: 10px;
+    }
+
+    .form-inner {
+      padding: 6px;
+    }
+
+    .section {
+      position: relative;
+      padding: 18px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 240, 213, 0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section__top {
+      margin-bottom: 16px;
+    }
+
+    .section__eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--gold-soft);
+      font-weight: 700;
+    }
+
+    .section__title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #fff5e7;
+    }
+
+    .field__hint {
+      margin: -2px 0 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted-2);
+    }
+
+    .required-mark {
+      color: var(--gold-soft);
+      margin-left: 4px;
+    }
+
+    .control {
+      width: 100%;
+      appearance: none;
+      border: 1px solid rgba(255, 240, 213, 0.10);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        rgba(13, 11, 9, 0.72);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      font-size: 15px;
+      line-height: 1.45;
+      transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition),
+        transform var(--transition);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.035),
+        0 6px 18px rgba(0,0,0,0.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .control::placeholder {
+      color: rgba(247, 241, 232, 0.34);
+    }
+
+    .control:hover {
+      border-color: rgba(255, 225, 170, 0.14);
+    }
+
+    .control:focus {
+      outline: none;
+      border-color: rgba(240, 211, 156, 0.42);
+      box-shadow:
+        0 0 0 4px rgba(225, 191, 124, 0.10),
+        0 10px 28px rgba(0, 0, 0, 0.22),
+        0 0 24px rgba(231, 197, 128, 0.12),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+
+    textarea.control {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(240, 215, 163, 0.85);
+      border-bottom: 2px solid rgba(240, 215, 163, 0.85);
+      transform: translateY(-65%) rotate(45deg);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    select.control {
+      padding-right: 44px;
+      cursor: pointer;
+    }
+
+    select.control option {
+      background: #15110d;
+      color: #fff6ea;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 240, 213, 0.09);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      appearance: none;
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 240, 213, 0.18);
+      background: rgba(0, 0, 0, 0.18);
+      position: relative;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .checkbox-row input[type="checkbox"]:checked {
+      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+      border-color: rgba(255, 232, 178, 0.34);
+      box-shadow:
+        0 0 20px rgba(232, 193, 120, 0.20),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .checkbox-row input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 5px;
+      height: 10px;
+      border-right: 2px solid #2c2010;
+      border-bottom: 2px solid #2c2010;
+      transform: rotate(45deg);
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .submit-wrap {
+      padding: 8px 2px 2px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #25190c;
+      cursor: pointer;
+      background:
+        linear-gradient(180deg, #f6e2bd 0%, #e2ba78 52%, #cb9452 100%);
+      box-shadow:
+        0 12px 28px rgba(200, 145, 66, 0.22),
+        0 0 36px rgba(240, 213, 162, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition),
+        opacity var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 35%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 700ms ease;
+    }
+
+    .submit-btn:hover::before,
+    .submit-btn:focus-visible::before {
+      transform: translateX(120%);
+    }
+
+    .submit-btn:hover,
+    .submit-btn:focus-visible {
+      transform: translateY(-1px);
+      box-shadow:
+        0 16px 34px rgba(200, 145, 66, 0.24),
+        0 0 42px rgba(240, 213, 162, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      outline: none;
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px) scale(0.995);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .error-text {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--danger);
+      display: none;
+    }
+
+    .field.invalid .control,
+    .field.invalid .checkbox-row {
+      border-color: rgba(255, 143, 127, 0.34);
+      box-shadow:
+        0 0 0 4px rgba(255, 143, 127, 0.08),
+        0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .field.invalid .error-text {
+      display: block;
+    }
+
+    .success-state {
+      display: none;
+      margin-top: 14px;
+      padding: 18px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--success-border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        var(--success-bg);
+      box-shadow:
+        0 10px 28px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .success-state.is-visible {
+      display: block;
+      animation: fadeUp 500ms ease both;
+    }
+
+    .success-state__title {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff6e8;
+    }
+
+    .success-state__text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        opacity 700ms ease,
+        transform 700ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes auraPulse {
+      0%, 100% {
+        transform: scale(0.96);
+        opacity: 0.72;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
+    }
+
+    @keyframes auraFloat {
+      0%, 100% {
+        transform: scale(1) translateY(0);
+      }
+      50% {
+        transform: scale(1.06) translateY(-3px);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 390px) {
+      .page {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero {
+        padding: 30px 22px 26px;
+      }
+
+      .section {
+        padding: 20px 16px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="ambient" aria-hidden="true">
+      <div class="ambient__blob ambient__blob--1"></div>
+      <div class="ambient__blob ambient__blob--2"></div>
+      <div class="ambient__blob ambient__blob--3"></div>
+    </div>
+
+    <div class="top-progress reveal">
+      <div class="top-progress__meta">
+        <div class="top-progress__label">Заполнение анкеты</div>
+        <div class="top-progress__value" id="progressText">Заполнено: 0%</div>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <section class="hero reveal" aria-labelledby="hero-title">
+      <div class="logo-wrap">
+        <div class="logo-frame">
+          <!-- ЗАМЕНИ src НА СВОЙ ЛОГОТИП -->
+          <img
+            src="your-logo.png"
+            alt="Символ программы Реинкарнация"
+            id="heroLogo"
+          />
+        </div>
+      </div>
+
+      <div class="eyebrow">Закрытый отбор</div>
+
+      <h1 id="hero-title">Реинкарнация</h1>
+      <p>
+        Отбор на программу наставничества для тех, кто готов зайти в рост,
+        дисциплину и реальную работу над собой.
+      </p>
+    </section>
+
+    <section class="form-shell reveal" aria-label="Форма заявки">
+      <div class="form-inner">
+        <form id="applicationForm" novalidate>
+          <div class="section reveal">
+            <div class="section__top">
+              <div class="section__eyebrow">Блок 1</div>
+              <h2 class="section__title">Базовая информация</h2>
+            </div>
+
+            <div class="grid-2">
+              <div class="field" data-required="true">
+                <label for="name">Имя<span class="required-mark">*</span></label>
+                <input
+                  class="control progress-field"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Например: Лев"
+                  autocomplete="name"
+                  required
+                />
+                <div class="error-text">Заполни это поле.</div>
+              </div>
+
+              <div class="field" data-required="true">
+                <label for="age">Возраст<span class="required-mark">*</span></label>
+                <input
+                  class="control progress-field"
+                  type="number"
+                  id="age"
+                  name="age"
+                  placeholder="Например: 18"
+                  min="0"
+                  max="99"
+                  inputmode="numeric"
+                  required
+                />
+                <div class="error-text">Укажи возраст.</div>
+              </div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="telegram">Telegram username<span class="required-mark">*</span></label>
+              <input
+                class="control progress-field"
+                type="text"
+                id="telegram"
+                name="telegram"
+                placeholder="@username"
+                autocomplete="off"
+                required
+              />
+              <div class="error-text">Укажи Telegram username.</div>
+            </div>
+          </div>
+
+          <div class="section reveal">
+            <div class="section__top">
+              <div class="section__eyebrow">Блок 2</div>
+              <h2 class="section__title">Текущий уровень</h2>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="currentPoint">
+                Чем ты сейчас занимаешься?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Работа, проекты, бизнес, учеба — опиши свою текущую точку.
+              </p>
+              <textarea
+                class="control progress-field"
+                id="currentPoint"
+                name="currentPoint"
+                placeholder="Опиши, чем ты занимаешься сейчас и в какой точке находишься."
+                required
+              ></textarea>
+              <div class="error-text">Нужно описать текущую точку.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="income">
+                Сколько ты сейчас зарабатываешь в месяц?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">Например: 0, 500, 2000 долларов.</p>
+              <input
+                class="control progress-field"
+                type="text"
+                id="income"
+                name="income"
+                placeholder="Например: 500 долларов"
+                required
+              />
+              <div class="error-text">Укажи текущий доход.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="skills">
+                Какие навыки у тебя уже есть?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Продажи, монтаж, дизайн, копирайтинг, контент, код и так далее.
+              </p>
+              <textarea
+                class="control progress-field"
+                id="skills"
+                name="skills"
+                placeholder="Перечисли навыки, которые у тебя уже есть."
+                required
+              ></textarea>
+              <div class="error-text">Заполни поле с навыками.</div>
+            </div>
+          </div>
+
+          <div class="section reveal">
+            <div class="section__top">
+              <div class="section__eyebrow">Блок 3</div>
+              <h2 class="section__title">Отбор в наставничество</h2>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="canDo">
+                Что ты умеешь уже сейчас?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Напиши честно, что у тебя уже получается и в чем твоя сильная сторона.
+              </p>
+              <textarea
+                class="control progress-field"
+                id="canDo"
+                name="canDo"
+                placeholder="Что у тебя уже получается?"
+                required
+              ></textarea>
+              <div class="error-text">Ответ обязателен.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="wantResult">
+                Что конкретно ты собираешься получить от наставничества?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Результат, деньги, система, дисциплина, запуск продукта, навыки. Что именно?
+              </p>
+              <textarea
+                class="control progress-field"
+                id="wantResult"
+                name="wantResult"
+                placeholder="Опиши ожидаемый результат."
+                required
+              ></textarea>
+              <div class="error-text">Опиши, что хочешь получить.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="whyYou">
+                Почему тебя должны взять?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Чем ты отличаешься от остальных и почему в тебя стоит вкладываться?
+              </p>
+              <textarea
+                class="control progress-field"
+                id="whyYou"
+                name="whyYou"
+                placeholder="Почему именно ты?"
+                required
+              ></textarea>
+              <div class="error-text">Это поле нужно заполнить.</div>
+            </div>
+          </div>
+
+          <div class="section reveal">
+            <div class="section__top">
+              <div class="section__eyebrow">Блок 4</div>
+              <h2 class="section__title">Готовность и намерение</h2>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="hours">
+                Сколько часов в день ты реально готов вкладывать?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">Например: 10, 20, 40 часов.</p>
+              <input
+                class="control progress-field"
+                type="text"
+                id="hours"
+                name="hours"
+                placeholder="Например: 4–6 часов в день"
+                required
+              />
+              <div class="error-text">Укажи свою готовность по времени.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="investment">
+                Готов ли ты инвестировать в рост, внедрение и работу над собой?<span class="required-mark">*</span>
+              </label>
+              <div class="select-wrap">
+                <select
+                  class="control progress-field"
+                  id="investment"
+                  name="investment"
+                  required
+                >
+                  <option value="">Выбери вариант</option>
+                  <option value="Да, полностью готов">Да, полностью готов</option>
+                  <option value="Частично готов">Частично готов</option>
+                  <option value="Зависит от формата">Зависит от формата</option>
+                  <option value="Пока не готов">Пока не готов</option>
+                </select>
+              </div>
+              <div class="error-text">Выбери один вариант.</div>
+            </div>
+
+            <div class="field" data-required="true">
+              <label for="transformation">
+                Какую главную трансформацию ты хочешь пройти за время программы?<span class="required-mark">*</span>
+              </label>
+              <p class="field__hint">
+                Опиши, каким человеком и в какой точке ты хочешь выйти после наставничества.
+              </p>
+              <textarea
+                class="control progress-field"
+                id="transformation"
+                name="transformation"
+                placeholder="Опиши желаемую трансформацию."
+                required
+              ></textarea>
+              <div class="error-text">Это поле обязательно.</div>
+            </div>
+          </div>
+
+          <div class="section reveal">
+            <div class="section__top">
+              <div class="section__eyebrow">Блок 5</div>
+              <h2 class="section__title">Подтверждение</h2>
+            </div>
+
+            <div class="field" data-required="true">
+              <div class="checkbox-row">
+                <input
+                  class="progress-field"
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  required
+                />
+                <label for="consent">
+                  Подтверждаю, что оставляю заявку осознанно и согласен на обработку
+                  данных для обратной связи по программе.
+                </label>
+              </div>
+              <div class="error-text">Нужно подтвердить согласие.</div>
+            </div>
+
+            <div class="submit-wrap">
+              <button class="submit-btn" type="submit" id="submitButton">
+                Отправить заявку
+              </button>
+            </div>
+
+            <div class="success-state" id="successState">
+              <h3 class="success-state__title">Заявка отправлена.</h3>
+              <p class="success-state__text">
+                Если ты действительно готов к росту — с тобой свяжутся.
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById("applicationForm");
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+      const successState = document.getElementById("successState");
+      const submitButton = document.getElementById("submitButton");
+      const progressFields = Array.from(document.querySelectorAll(".progress-field"));
+      const requiredFields = Array.from(form.querySelectorAll("[required]"));
+      const revealItems = document.querySelectorAll(".reveal");
+
+      function hasValue(field) {
+        if (field.type === "checkbox") return field.checked;
+        if (field.tagName === "SELECT") return field.value.trim() !== "";
+        return field.value.trim() !== "";
+      }
+
+      function updateProgress() {
+        const filled = progressFields.filter(hasValue).length;
+        const total = progressFields.length;
+        const percent = Math.round((filled / total) * 100);
+
+        progressBar.style.width = percent + "%";
+        progressText.textContent = "Заполнено: " + percent + "%";
+      }
+
+      function validateField(field) {
+        const fieldWrap = field.closest(".field");
+        if (!fieldWrap) return true;
+
+        let valid = true;
+
+        if (field.type === "checkbox") {
+          valid = field.checked;
+        } else if (field.tagName === "SELECT") {
+          valid = field.value.trim() !== "";
+        } else {
+          valid = field.value.trim() !== "";
+        }
+
+        fieldWrap.classList.toggle("invalid", !valid);
+        return valid;
+      }
+
+      function validateForm() {
+        let firstInvalid = null;
+        let isValid = true;
+
+        requiredFields.forEach((field) => {
+          const valid = validateField(field);
+          if (!valid && !firstInvalid) firstInvalid = field;
+          if (!valid) isValid = false;
+        });
+
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+          setTimeout(() => firstInvalid.focus(), 250);
+        }
+
+        return isValid;
+      }
+
+      progressFields.forEach((field) => {
+        const eventName =
+          field.type === "checkbox" || field.tagName === "SELECT" ? "change" : "input";
+
+        field.addEventListener(eventName, function () {
+          validateField(field);
+          updateProgress();
+        });
+
+        field.addEventListener("blur", function () {
+          validateField(field);
+        });
+      });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const isValid = validateForm();
+        updateProgress();
+
+        if (!isValid) return;
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Отправка...";
+
+        const formData = Object.fromEntries(new FormData(form).entries());
+
+        setTimeout(function () {
+          console.log("FORM_DATA:", formData);
+
+          form.style.display = "block";
+          successState.classList.add("is-visible");
+          submitButton.textContent = "Заявка отправлена";
+          submitButton.disabled = false;
+
+          // Если хочешь скрывать форму после успеха, раскомментируй:
+          // form.querySelectorAll(".section:not(:last-child)").forEach(el => el.style.display = "none");
+
+          // Telegram WebApp integration example:
+          // if (window.Telegram && window.Telegram.WebApp) {
+          //   window.Telegram.WebApp.sendData(JSON.stringify(formData));
+          // }
+
+          // Webhook example:
+          // fetch("https://your-domain.com/webhook", {
+          //   method: "POST",
+          //   headers: { "Content-Type": "application/json" },
+          //   body: JSON.stringify(formData)
+          // }).catch(console.error);
+
+          successState.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 700);
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        // Можно подстроить цвета Telegram темы при желании:
+        // document.body.style.backgroundColor = tg.themeParams.bg_color || "#080706";
+      }
+
+      updateProgress();
+    })();
+  </script>
+</body>
+</html>
