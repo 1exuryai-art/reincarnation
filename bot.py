@@ -12,7 +12,7 @@ def start(message):
     keyboard.add(
         InlineKeyboardButton(
             text="ОТКРЫТЬ НАБОР",
-            web_app=WebAppInfo(url=SITE_URL)
+            web_app=WebAppInfo(SITE_URL)
         )
     )
 
